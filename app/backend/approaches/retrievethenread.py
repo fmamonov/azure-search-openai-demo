@@ -99,7 +99,7 @@ def __init__(
         self.query_language = query_language
         self.query_speller = query_speller
 
-    async def run(
+async def run(
         self,
         messages: list[dict],
         stream: bool = False,  # Stream is not used in this approach

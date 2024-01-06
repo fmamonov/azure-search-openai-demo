@@ -14,4 +14,4 @@ if (Test-Path -Path "/usr") {
 }
 
 Write-Host 'Installing dependencies from "requirements.txt" into virtual environment'
-Start-Process -FilePath $venvPythonPath -ArgumentList "-m pip install -r scripts/requirements.txt" -Wait -NoNewWindow
+Start-Process -FilePath $venvPythonPath -ArgumentList "-m pip install pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org -r scripts/requirements.txt" -Wait -NoNewWindow
