@@ -24,28 +24,28 @@ class RetrieveThenReadApproach(Approach):
 system_chat_template = (
     "You are an intelligent assistant helping analyze, translate and extracting information from legal documents from different countries such as Algeria and Morocco, The documents contain different languages Arabic, French and English text, graphs, tables and images. "
     + "Only answer in English, if the text is in Arabic or French translate it to English and extract the answer"
-    +"Each image source has the file name in the top left corner of the image with coordinates (10,10) pixels and is in the format SourceFileName:<file_name> "
+    + "Each image source has the file name in the top left corner of the image with coordinates (10,10) pixels and is in the format SourceFileName:<file_name> "
     + "Each text source starts in a new line and has the file name followed by colon and the actual information "
     + "Always include the source name from the image or text for each fact you use in the response in the format: [filename] "
     + "Answer the following question using only the data provided in the sources below. "
     + "For tabular information return it as an html table. Do not return markdown format. "
-    +"Outputs should use exact contract language unless told specifically to summarize. Outputs in the form of tables may be useful for some prompts."
-    +"Be precise in your answers, even extract the sentences as is from the document."
-    +"It will be important to understand if the output is the exact same language or if it was summarize."
-    +"Answer ONLY with the facts listed in the list of sources below. If there isn't enough information below, say you don't know. Do not generate answers that don't use the sources below."
-    +"If asking a clarifying question to the user would help, ask the question."
-    +"For tabular information return it as an html table. Do not return markdown format."
-    +"If the question is not in English, answer in the language used in the question."
-    +"If there are multiple answers then either ask a clarifying question also if there are multiple answers rank all of these answers and provide all the answers ranked from highest confidence to lowest."
-    +"Before you answer a question review the answer and ensure it is correct. Think step by step when you answer an answer to ensure it is correct."
-    +"Each source has a name followed by colon and the actual information, always include the source name for each fact you use in the response." 
-    +"Use square brackets to reference the source, e.g. [info1.txt]."
-    +"Don't combine sources, list each source separately, e.g. [info1.txt][info2.pdf]."
+    + "Outputs should use exact contract language unless told specifically to summarize. Outputs in the form of tables may be useful for some prompts."
+    + "Be precise in your answers, even extract the sentences as is from the document."
+    + "It will be important to understand if the output is the exact same language or if it was summarize."
+    + "Answer ONLY with the facts listed in the list of sources below. If there isn't enough information below, say you don't know. Do not generate answers that don't use the sources below."
+    + "If asking a clarifying question to the user would help, ask the question."
+    + "For tabular information return it as an html table. Do not return markdown format."
+    + "If the question is not in English, answer in the language used in the question."
+    + "If there are multiple answers then either ask a clarifying question also if there are multiple answers rank all of these answers and provide all the answers ranked from highest confidence to lowest."
+    + "Before you answer a question review the answer and ensure it is correct. Think step by step when you answer an answer to ensure it is correct."
+    + "Each source has a name followed by colon and the actual information, always include the source name for each fact you use in the response." 
+    + "Use square brackets to reference the source, e.g. [info1.txt]."
+    + "Don't combine sources, list each source separately, e.g. [info1.txt][info2.pdf]."
     + "Each source has a name followed by colon and the actual data, quote the source name for each piece of data you use in the response. "'For example, if the question is "Who the buyer in the School House PPA" and one of the information sources says "info123: the buyer is Constellation NewEnergy", then answer with the exact answer from source and including it in quotation mark plus include the document [info123]" '
-    +"'It's important to strictly follow the format where the name of the source is in square brackets at the end of the sentence, and only up to the prefix before the colon"
-    +"'If there are multiple sources, cite each one in their own square brackets. For example, use '[info343][ref-76]' and not [info343,ref-76]"
-    +"If you cannot answer using the sources below, say to provide clarifying question or provide an example."
-    +"You can access to the following tools:"
+    + "'It's important to strictly follow the format where the name of the source is in square brackets at the end of the sentence, and only up to the prefix before the colon"
+    + "'If there are multiple sources, cite each one in their own square brackets. For example, use '[info343][ref-76]' and not [info343,ref-76]"
+    + "If you cannot answer using the sources below, say to provide clarifying question or provide an example."
+    + "You can access to the following tools:"
     + "Use 'you' to refer to the individual asking the questions even if they ask with 'I'."
     + "Answer the following question using only the data provided in the sources below."
     + "For tabular information return it as an html table. Do not return markdown format."
@@ -56,7 +56,8 @@ system_chat_template = (
 )
 
 # shots/sample conversation
-question = """Could you compare the investment climates of Tunisia and Algeria based on the 2023 Investment Climate Statements, focusing on government incentives, market opportunities, and investment policies?"
+question = """
+'Could you compare the investment climates of Tunisia and Algeria based on the 2023 Investment Climate Statements, focusing on government incentives, market opportunities, and investment policies?'
 
 Sources:
 [0038 - Algeria - 2023 Investment Climate Statements.pdf]: The government passed a new hydrocarbon law in 2019, improving fiscal terms and contract flexibility in order to attract new international investors.
@@ -99,7 +100,7 @@ def __init__(
         self.query_language = query_language
         self.query_speller = query_speller
 
-    async def run(
+async def run(
         self,
         messages: list[dict],
         stream: bool = False,  # Stream is not used in this approach
